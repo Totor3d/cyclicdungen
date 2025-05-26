@@ -60,7 +60,10 @@ def calcRectsPosition(rects, iterations = 300):
             for i in rects:
                 rectsTransforms.append((i.position.x, i.position.y, i.size.x, i.size.y))
 
-            gridprinter.printGrid(gridprinter.drawRectanglesOnGrid(rectsTransforms))
+            points = []
+            for i in range(len(rects)):
+                points.append((rects[i].position.x, rects[i].position.y, i))
+            gridprinter.printGrid(gridprinter.setPointsOnGrid(points, gridprinter.drawRectanglesOnGrid(rectsTransforms)))
     
 
     return rects

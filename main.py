@@ -3,7 +3,7 @@ import rectsPhysics
 import physics
 import gridprinter
 
-graph = [(0, 1), (1, 2), (2, 0), (2, 3), (3, 4), (4, 5), (4, 6), (6, 5), (6, 0)]
+graph = [(0, 1), (1, 2), (2, 0), (2, 3), (3, 4), (3, 6), (4, 5), (4, 6), (6, 5), (6, 0)]
 positions = vertexPhysics.calcGraphVertexPosition(graph, 100, 20)
 
 

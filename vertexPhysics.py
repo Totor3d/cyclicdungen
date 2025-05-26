@@ -3,7 +3,7 @@ import random
 import gridprinter
 from physics import Vector2, Body
 
-debug = False
+debug = True
 
 
 def printBodies(bodies):
