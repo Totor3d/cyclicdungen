@@ -4,7 +4,7 @@ import physics
 import gridprinter
 
 graph = [(0, 1), (1, 2), (2, 0), (2, 3), (3, 4), (3, 6), (4, 5), (4, 6), (6, 5), (6, 0)]
-positions = vertexPhysics.calcGraphVertexPosition(graph, 100, 20)
+positions = vertexPhysics.calcGraphVertexPosition(graph, 150, 20)
 
 
 

@@ -52,7 +52,7 @@ def addVertexAsBodies(graph):
     for i in range(el + 1):
         bodies.append(Body(random.randint(-10, 10), random.randint(-10, 10), i))
 
-def calcGraphVertexPosition(graph, iterations = 100, minDistance = 5):
+def calcGraphVertexPosition(graph, iterations = 150, minDistance = 5):
     
     addVertexAsBodies(graph)
 
