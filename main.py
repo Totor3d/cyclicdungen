@@ -4,7 +4,7 @@ import physics
 import gridprinter
 
 graph = [(0, 1), (1, 2), (2, 0), (2, 3), (3, 4), (3, 6), (4, 5), (4, 6), (6, 5), (6, 0)]
-positions = vertexPhysics.calcGraphVertexPosition(graph, 150, 20)
+positions = vertexPhysics.calcGraphVertexPosition(graph, 200, 20)
 
 
 
@@ -15,7 +15,7 @@ rects = []
 for i in positions:
     rects.append(physics.Rectangle(physics.Vector2(i[0], i[1]), physics.Vector2(10, 10)))
 
-rectsPositions = rectsPhysics.calcRectsPosition(rects)
+rectsPositions = rectsPhysics.calcRectsPosition(rects, 300, graph)
 
 points = []
 for i in range(len(positions)):

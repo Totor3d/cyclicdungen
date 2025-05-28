@@ -7,6 +7,8 @@ zoom = 2
 
 delay = 0.01
 
+def getPosOnGrid(x, y):
+    return (size//2+(math.floor(x))//zoom, size//2+(math.floor(y))//zoom)
 
 def printGrid(grid):
     for i in grid:
@@ -20,7 +22,8 @@ def setPointsOnGrid(points, grid = None):
     
     for x, y, s in points:
         try:
-            grid[size//2+(math.floor(x))//zoom][size//2+(math.floor(y))//zoom] = s
+            gx, gy = getPosOnGrid(x, y)
+            grid[gx][gy] = s
         except IndexError:
             pass
     return grid
@@ -44,5 +47,40 @@ def drawRectanglesOnGrid(rectangles, grid = None):
             
         except IndexError:
             pass
+    
+    return grid
+
+def drawLines(points, s=";", grid = None):
+    if not grid:
+        grid = [["." for x in range(size)] for y in range(size)]
+    for p in points:
+        point1 = p[0]
+        point2 = p[1]
+        x1, y1 = getPosOnGrid(point1[0], point1[1])
+        x2, y2 = getPosOnGrid(point2[0], point2[1])
+
+        
+        dx = abs(x2 - x1)
+        dy = abs(y2 - y1)
+        
+        sx = 1 if x1 < x2 else -1
+        sy = 1 if y1 < y2 else -1
+        
+        err = dx - dy
+        
+        while True:
+            if 0 <= y1 < len(grid) and 0 <= x1 < len(grid[0]):
+                grid[y1][x1] = s
+            
+            if x1 == x2 and y1 == y2:
+                break
+            
+            e2 = 2 * err
+            if e2 > -dy:
+                err -= dy
+                x1 += sx
+            if e2 < dx:
+                err += dx
+                y1 += sy
     
     return grid

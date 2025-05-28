@@ -1,4 +1,5 @@
 from physics import Vector2, Rectangle, Body, addGravityForces
+from vertexPhysics import getNeighbour
 import gridprinter
 import math
 
@@ -9,7 +10,7 @@ def addForces(bodies, power):
     for b in bodies:
         b.addImpulses((bodies[len(bodies)//2].position - b.position)*-1)
 
-def calcRectsPosition(rects, iterations = 300):
+def calcRectsPosition(rects, iterations = 300, graph = []):
 
     bodies = []
 
@@ -60,10 +61,16 @@ def calcRectsPosition(rects, iterations = 300):
             for i in rects:
                 rectsTransforms.append((i.position.x, i.position.y, i.size.x, i.size.y))
 
+            lines = []
+    
+            for i in range(len(graph)):
+                for j in getNeighbour(i, graph):
+                    lines.append(((bodies[i].position.y, bodies[i].position.x), (bodies[j].position.y, bodies[j].position.x)))
+            
             points = []
             for i in range(len(rects)):
                 points.append((rects[i].position.x, rects[i].position.y, i))
-            gridprinter.printGrid(gridprinter.setPointsOnGrid(points, gridprinter.drawRectanglesOnGrid(rectsTransforms)))
+            gridprinter.printGrid(gridprinter.setPointsOnGrid(points, gridprinter.drawRectanglesOnGrid(rectsTransforms, gridprinter.drawLines(lines))))
     
 
     return rects

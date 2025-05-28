@@ -5,20 +5,6 @@ from physics import Vector2, Body
 
 debug = True
 
-
-def printBodies(bodies):
-    points = []
-    for b in bodies:
-        v = b.position
-        points.append((v.x, v.y, str(b.id)))
-    gridprinter.printGrid(gridprinter.setPointsOnGrid(points))
-
-def updateBodies(bodies, delta):
-    for b in bodies:
-        b.update(delta)
-
-
-
 def getNeighbour(v, graph):
     neighbours = []
     for i in graph:
@@ -27,6 +13,26 @@ def getNeighbour(v, graph):
         elif i[1] == v:
             neighbours.append(i[0])
     return neighbours
+
+def printBodies(bodies, graph):
+    points = []
+    for b in bodies:
+        v = b.position
+        
+        points.append((v.x, v.y, str(b.id)))
+    lines = []
+    
+    for i in range(len(graph)):
+        for j in getNeighbour(i, graph):
+            lines.append(((bodies[i].position.y, bodies[i].position.x), (bodies[j].position.y, bodies[j].position.x)))
+
+    gridprinter.printGrid(gridprinter.setPointsOnGrid(points, gridprinter.drawLines(lines)))
+
+def updateBodies(bodies, delta):
+    for b in bodies:
+        b.update(delta)
+
+
 
 def spring(distance, minDistance):
     return min((distance - minDistance)**3/(100*minDistance), 5)
@@ -52,6 +58,11 @@ def addVertexAsBodies(graph):
     for i in range(el + 1):
         bodies.append(Body(random.randint(-10, 10), random.randint(-10, 10), i))
 
+
+def drawDebug(iterationNum, bodies, graph):
+    print(iterationNum)
+    printBodies(bodies, graph)
+
 def calcGraphVertexPosition(graph, iterations = 150, minDistance = 5):
     
     addVertexAsBodies(graph)
@@ -60,8 +71,7 @@ def calcGraphVertexPosition(graph, iterations = 150, minDistance = 5):
         addImpulses(bodies, graph, minDistance)
         updateBodies(bodies, 0.1)
         if debug:
-            print(i)
-            printBodies(bodies)
+            drawDebug(i, bodies, graph)
     
     result = []
     for i in sorted(bodies, key=lambda x: x.id):
@@ -79,6 +89,5 @@ if __name__ == "__main__":
         addImpulses(bodies)
         updateBodies(bodies, 0.1)
         if debug:
-            print(t)
-            printBodies(bodies)
+            drawDebug(t, bodies, graph)
         t += 1
