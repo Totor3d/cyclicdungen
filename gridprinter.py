@@ -2,6 +2,8 @@ import os
 import time
 import math
 
+void = " "
+
 size = 60
 zoom = 2
 
@@ -18,7 +20,7 @@ def printGrid(grid):
 
 def setPointsOnGrid(points, grid = None):
     if not grid:
-        grid = [["." for x in range(size)] for y in range(size)]
+        grid = [[void for x in range(size)] for y in range(size)]
     
     for x, y, s in points:
         try:
@@ -30,7 +32,7 @@ def setPointsOnGrid(points, grid = None):
 
 def drawRectanglesOnGrid(rectangles, grid = None):
     if not grid:
-        grid = [["." for x in range(size)] for y in range(size)]
+        grid = [[void for x in range(size)] for y in range(size)]
     
     for x, y, w, h in rectangles:
         w = math.floor(w)
@@ -50,9 +52,9 @@ def drawRectanglesOnGrid(rectangles, grid = None):
     
     return grid
 
-def drawLines(points, s=";", grid = None):
+def drawLines(points, s="o", grid = None):
     if not grid:
-        grid = [["." for x in range(size)] for y in range(size)]
+        grid = [[void for x in range(size)] for y in range(size)]
     for p in points:
         point1 = p[0]
         point2 = p[1]
