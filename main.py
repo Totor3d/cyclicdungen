@@ -2,9 +2,10 @@ import vertexPhysics
 import rectsPhysics
 import physics
 import gridprinter
+import doors
 
 graph = [(0, 1), (1, 2), (2, 0), (2, 3), (3, 4), (3, 6), (4, 5), (4, 6), (6, 5), (6, 0)]
-positions = vertexPhysics.calcGraphVertexPosition(graph, 200, 20)
+positions = vertexPhysics.calcGraphVertexPosition(graph, 200, 8)
 
 
 
@@ -30,5 +31,8 @@ for i in rectsPositions:
 
 grid = gridprinter.drawRectanglesOnGrid(rectsForPrint)
 grid = gridprinter.setPointsOnGrid(points, grid)
+
+doors = doors.calcDoorsPositions(graph, points)
+grid = gridprinter.setPointsOnGrid(doors, grid)
 
 gridprinter.printGrid(grid)

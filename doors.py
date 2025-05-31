@@ -1,6 +1,7 @@
+from vertexPhysics import getNeighbour
 
-
-array = [[0 for _ in range(10)] for _ in range(10)]
-result = draw_line(array, (1, 1), (8, 2))
-for row in result:
-    print(' '.join(map(str, row)))
+def calcDoorsPositions(graph, points):
+    doors = []
+    for e in graph:
+        doors.append(((points[e[0]][0]+points[e[1]][0])/2, (points[e[0]][1]+points[e[1]][1])/2, "D"))
+    return doors

@@ -5,7 +5,7 @@ import math
 void = " "
 
 size = 60
-zoom = 2
+zoom = 1
 
 delay = 0.01
 
