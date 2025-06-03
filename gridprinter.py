@@ -35,8 +35,8 @@ def drawRectanglesOnGrid(rectangles, grid = None):
         grid = [[void for x in range(size)] for y in range(size)]
     
     for x, y, w, h in rectangles:
-        w = math.floor(w)
-        h = math.floor(h)
+        w = math.ceil(w)
+        h = math.ceil(h)
         try:
             for i in range(w):
                 grid[size//2+(math.floor(x) + i - w//2)//zoom][size//2+(math.floor(y) - h//2)//zoom] = "#"

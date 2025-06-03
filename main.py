@@ -3,9 +3,12 @@ import rectsPhysics
 import physics
 import gridprinter
 import doors
+import mapPlanner
 
-graph = [(0, 1), (1, 2), (2, 0), (2, 3), (3, 4), (3, 6), (4, 5), (4, 6), (6, 5), (6, 0)]
-positions = vertexPhysics.calcGraphVertexPosition(graph, 200, 8)
+graph = mapPlanner.createPlan()
+
+#graph = [(0, 1), (1, 2), (2, 0), (3, 4), (3, 6), (4, 6), (6, 5), (6, 0)]
+positions = vertexPhysics.calcGraphVertexPosition(graph, 200, 15)
 
 
 
@@ -14,7 +17,7 @@ positions = vertexPhysics.calcGraphVertexPosition(graph, 200, 8)
 rects = []
 
 for i in positions:
-    rects.append(physics.Rectangle(physics.Vector2(i[0], i[1]), physics.Vector2(10, 10)))
+    rects.append(physics.Rectangle(physics.Vector2(i[0], i[1]), physics.Vector2(8, 8)))
 
 rectsPositions = rectsPhysics.calcRectsPosition(rects, 300, graph)
 

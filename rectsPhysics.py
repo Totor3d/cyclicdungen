@@ -10,7 +10,7 @@ def addForces(bodies, power):
     for b in bodies:
         b.addImpulses((bodies[len(bodies)//2].position - b.position)*-1)
 
-def calcRectsPosition(rects, iterations = 300, graph = []):
+def calcRectsPosition(rects, iterations = 150, graph = []):
 
     bodies = []
 
@@ -28,8 +28,8 @@ def calcRectsPosition(rects, iterations = 300, graph = []):
                     # rects[j].grow = False
                     # rects[i].size = rects[i].size * (1/1.001)
                     if i != j:
-                        bodies[i].powerInfluence = 1
-                        #bodies[i].speed = bodies[i].speed * 0
+                        #bodies[i].powerInfluence = 1
+                        #bodies[i].speed = bodies[i].speed * 0.998
 
                         x = bodies[i].position.x
                         y = bodies[i].position.y
@@ -44,9 +44,9 @@ def calcRectsPosition(rects, iterations = 300, graph = []):
                         mid = (bodies[i].speed + bodies[j].speed) * 0.5
                         bodies[i].speed = mid
                         bodies[j].speed = mid
-                else:
-                    bodies[i].powerInfluence = 1
-                    bodies[i].speed = bodies[i].speed * 1
+                # else:
+                #     bodies[i].powerInfluence = 1
+                #     bodies[i].speed = bodies[i].speed * 1
                 # else:
                 #     rects[i].grow = True
                 
@@ -72,5 +72,16 @@ def calcRectsPosition(rects, iterations = 300, graph = []):
                 points.append((rects[i].position.x, rects[i].position.y, i))
             gridprinter.printGrid(gridprinter.setPointsOnGrid(points, gridprinter.drawRectanglesOnGrid(rectsTransforms, gridprinter.drawLines(lines))))
     
+    xcenter = 0
+    ycenter = 0
+    for i in rects:
+        xcenter += i.position.x
+        ycenter += i.position.y
+    xcenter /= len(rects)
+    ycenter /= len(rects)
+
+    for r in rects:
+        r.position.x -= xcenter
+        r.position.y -= ycenter 
 
     return rects
